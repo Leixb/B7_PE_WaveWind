@@ -1,7 +1,25 @@
 \input{preamble}
 
+\definecolor{codegreen}{rgb}{0,0.6,0} \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{ backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen}, keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray}, stringstyle=\color{red},
+    identifierstyle=\color{black}, basicstyle=\footnotesize,
+    %breakatwhitespace=false,
+    breaklines=true,
+    %captionpos=b,                    keepspaces=true,
+    numbers=left,                    numbersep=5pt,
+    showspaces=false,
+    %showstringspaces=false, showtabs=false,
+    tabsize=4 }
+
+\lstset{style=mystyle}
+
 \title{
-  Wave Bitches
+  Título
 }
 \author{
   Aleix Boné\\
@@ -15,13 +33,29 @@
 \begin{document}
 \maketitle
 
-\section{Resumen}%
-\label{sec:resumen}
+\begin{abstract}
+% resumen
 % <= 250 palabras
+\end{abstract}
 
 \section{Introducción}%
 \label{sec:introduccion}
 % Justificación + objetivos
+
+\section{Recogida de datos}%
+\label{sec:recogida_de_datos}
+
+Para realizar nuestro análisis recogimos datos de viento y altura de olas de
+dos localizaciones distintas. Escogimos dos playas conocidas por sus buenas
+olas para hacer surf: Nazaré, Portugal y Jaws, Hawaii.
+
+Pudimos obtener datos de oleaje y viento del archivo de \emph{WindGuru}
+\footnote{\url{https://www.windguru.cz/archive.php}}. Con un script de
+python\footnote{El código se puede ver en el anexo
+  \ref{sec:codigo_extraccion_de_datos}} extrajimos datos de la altura de las
+olas y viento en periodos de 3 horas de 2006 hasta hoy. En el caso de Nazaré
+obtuvimos datos de 4377 días (35016 periodos de 3 horas) y en Jaws 3338 días
+(26704 periodos de 3 horas).
 
 \section{Métodos}%
 \label{sec:metodos}
@@ -29,10 +63,20 @@
 
 \section{Resultados}%
 \label{sec:resultados}
-% Descriptiva más inferéncia
+% Descriptiva más inferencia
 
 \section{Discusión}%
 \label{sec:discusión}
+
+\pagebreak
+\appendix
+
+\section{Código extracción de datos}%
+\label{sec:codigo_extraccion_de_datos}
+
+\lstinputlisting[language=Python]{./process.py}
+
+
 
 \end{document}
 
