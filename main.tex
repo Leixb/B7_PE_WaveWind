@@ -18,6 +18,10 @@
 
 \lstset{style=mystyle}
 
+
+\graphicspath{ ./figures/ }
+
+
 \title{
    Manolo
 }
@@ -65,6 +69,22 @@ obtuvimos datos de 4377 días (35016 periodos de 3 horas) y en Jaws 3338 días
 \label{sec:resultados}
 % Descriptiva más inferencia
 
+
+
+\begin{figure}[h]
+  \caption{Velocidad de viento vs. Altura de olas en Jaws, Hawaii}
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/jaws.pdf}
+\end{figure}
+
+\begin{figure}[h]
+  \caption{Velocidad de viento vs. Altura de olas en Nazaré, Protugal}
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/nazare.pdf}
+\end{figure}
+
+
+
 \section{Discusión}%
 \label{sec:discusión}
 
@@ -75,8 +95,6 @@ obtuvimos datos de 4377 días (35016 periodos de 3 horas) y en Jaws 3338 días
 \label{sec:codigo_extraccion_de_datos}
 
 \lstinputlisting[language=Python]{./process.py}
-
-
 
 \end{document}
 
