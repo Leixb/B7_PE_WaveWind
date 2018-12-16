@@ -1,5 +1,7 @@
 \input{preamble}
 
+%\geometry{margin=1in}
+
 \title{
    Probabilidad y estadística - B7 \\
    \large 
@@ -26,6 +28,9 @@
 \section{Introducción}%
 \label{sec:introduccion}
 % Justificación + objetivos
+Dentro del ámbito del surf hay muchos factores a tener en cuenta en cuanto  a lo que se refiere a la ``ola perfecta''. Entre ellos, dos de los más importantes son el tamaño de la ola y la velocidad del viento.
+
+En este caso queremos comparar dos de los surf spots\footnote{Lugar con olas surfeables} con las olas más grandes del mundo a lo largo de la historia; Nazaré en Portugal y Jaws en Peahi, Hawaii. Paralelamente observaremos qué relación tiene la velocidad de viento con el tamaño de las olas en ambos sitios.
 
 \section{Recogida de datos}%
 \label{sec:recogida_de_datos}
@@ -52,16 +57,18 @@ obtuvimos datos de 4377 días (35016 periodos de 3 horas) y en Jaws 3338 días
 
 
 
-\begin{figure}[h]
+\begin{figure}[!ht]
+\label{fig:wind_waves_jaws}
   \caption{Velocidad de viento vs. Altura de olas en Jaws, Hawaii}
 \centering
-\includegraphics[width=0.8\textwidth]{./figures/jaws.pdf}
+\includegraphics[width=0.6\textwidth]{./figures/jaws.pdf}
 \end{figure}
 
-\begin{figure}[h]
-  \caption{Velocidad de viento vs. Altura de olas en Nazaré, Protugal}
+\begin{figure}[!ht]
+\label{fig:wind_waves_nazare}
+  \caption{Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
 \centering
-\includegraphics[width=0.8\textwidth]{./figures/nazare.pdf}
+\includegraphics[width=0.6\textwidth]{./figures/nazare.pdf}
 \end{figure}
 
 
