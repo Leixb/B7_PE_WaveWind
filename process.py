@@ -7,46 +7,31 @@ parser = argparse.ArgumentParser()
 parser.add_argument('files', type=str, nargs='+')
 parser.add_argument('--output', '-o', type=str, default='data.csv')
 parser.add_argument('--pickle', '-p', type=str, default='data.pkl')
-
 args = parser.parse_args()
-
-l = [
-        ('Wind Speed (knots)', 2),
-        ('Wind Speed (knots)', 5),
-        ('Wind Speed (knots)', 8),
-        ('Wind Speed (knots)', 11),
-        ('Wind Speed (knots)', 14),
-        ('Wind Speed (knots)', 17),
-        ('Wind Speed (knots)', 20),
-        ('Wind Speed (knots)', 23),
-        ('Wave (m)', 2),
-        ('Wave (m)', 5),
-        ('Wave (m)', 8),
-        ('Wave (m)', 11),
-        ('Wave (m)', 14),
-        ('Wave (m)', 17),
-        ('Wave (m)', 20),
-        ('Wave (m)', 23),
-        ]
 
 frames = []
 
 for filename in args.files:
-    print(filename)
+    print('Processing: ', filename)
     with open(filename, 'r') as f:
-        df = pd.read_html(f,
-                skiprows=2, index_col=0,
+        df = pd.read_html(f, skiprows=2, index_col=0,
                 attrs={'class' : 'forecast daily-archive'},
-                na_values=['-'],
-                flavor=['html5lib'])[0]
-
-    df.index = pd.to_datetime(df.index)
+                na_values=['-'], flavor=['html5lib'])[0]
 
     frames.append(df)
 
 result = pd.concat(frames)
 
-result.columns = pd.MultiIndex.from_tuples(l, names=['Variable', 'Hour'])
+l = [('Wind', '02:00'), ('Wind', '05:00'), ('Wind', '08:00'), ('Wind', '11:00'),
+    ('Wind', '14:00'), ('Wind', '17:00'), ('Wind', '20:00'), ('Wind', '23:00'),
+    ('Wave', '02:00'), ('Wave', '05:00'), ('Wave', '08:00'), ('Wave', '11:00'),
+    ('Wave', '14:00'), ('Wave', '17:00'), ('Wave', '20:00'), ('Wave', '23:00')]
+
+result.columns = pd.MultiIndex.from_tuples(l)
+result = result.stack()
+result.index = pd.to_datetime(
+        result.index.map(lambda x: '{} {}'.format(x[0], x[1])))
+result.index.name = 'Time Stamp'
 
 print(result)
 print(result.describe())
