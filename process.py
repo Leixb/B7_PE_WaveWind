@@ -31,7 +31,8 @@ result.columns = pd.MultiIndex.from_tuples(l)
 result = result.stack()
 result.index = pd.to_datetime(
         result.index.map(lambda x: '{} {}'.format(x[0], x[1])))
-result.index.name = 'Time Stamp'
+result.index.name = 'Time'
+result = result[~result.index.duplicated(keep='first')]
 
 print(result)
 print(result.describe())
