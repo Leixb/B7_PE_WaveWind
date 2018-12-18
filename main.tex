@@ -71,6 +71,7 @@ El Cuadro \ref{tab:summary_nazare} muestra un resumen de los datos recogidos sob
 \end{figure}
 Con respecto a los datos sobre la velocidad del viento sucede algo parecido, pero en este caso los datos se concentran sobre todo entre la mediana (8 nudos) y el tercer cuartil (11 nudos) ya que la media es de 8.6 nudos. Sin embargo el valor máximo se aleja mucho de la media llegando a multiplicar su valor por más de cuatro siendo este de 38 nudos. También se puede observar que el mínimo, al igual que con la altura es de 0 nudos.
 
+
 \begin{table}[htbp]
 \centering
 \input{tables/summary_jaws2.tex}
@@ -81,30 +82,34 @@ Con respecto a los datos sobre la velocidad del viento sucede algo parecido, per
 
 En el caso de Jaws, los datos se exponen en el Cuadro \ref{tab:summary_jaws}, y se observa que la distribución de la altura es bastante similar a la de Nazaré pero los datos están levemente más centrados (véase Figura \ref{fig:hist_waves_jaws}). En Jaws el rango de altura es menor ya que el valor mínimo sigue siendo de 0 metros pero el máximo en cambio es de 5.9, casi la mitad que en Nazaré. La media y la mediana prácticamente coinciden siendo 2 y 1.9 metros respectivamente. El primer cuartil se encuentra en 1.6 metros y el tercero en 2.4 metros.
 
-
-
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{./figures/jaws_hist_wave.pdf}
+\includegraphics[height=5.6cm]{./figures/jaws_hist_wave.pdf}
   \caption{Histograma de olas en Jaws}
   \label{fig:hist_waves_jaws}
 \end{figure}
 
+La velocidad del viento en Jaws en comparación con la de Nazaré, a pesar de que el máximo (32 nudos) es inferior, es mucho superior con una media de 11.4 \si{\knot}. Tiene una distribución relativamente simétrica ya que la mediana se encuentra en 12 nudos y el primer y tercer cuartiles en 8 y 15 nudos respectivamente. El mínimo como es de esperar también es de 0 nudos.
+
+
+
 \begin{figure}[H]
 \begin{subfigure}{.49\textwidth}
-\label{fig:boxplot_wind}
 \centering
 \includegraphics[width=0.9\textwidth]{./figures/boxplot_wind.pdf}
   \caption{Boxplot Viento}
+\label{fig:boxplot_wind}
 \end{subfigure}%
 \begin{subfigure}{.49\textwidth}
-\label{fig:boxplot_wave}
 \centering
 \includegraphics[width=0.9\textwidth]{./figures/boxplot_wave.pdf}
   \caption{Boxplot Olas}
+\label{fig:boxplot_wave}
 \end{subfigure}
 \caption{Boxplots}
 \end{figure}
+
+En la Figura \ref{fig:boxplot_wind} podemos ver claramente como la media de la velocidad del viento en Jaws es superior a la de Nazaré, no obstante la variabilidad de Jaws es ligeramente superior como se puede apreciar en el primer cuartil Jaws. En cuanto a la altura de las olas (véase Figura \ref{fig:boxplot_wave}), la media es levemente mayor y a diferencia del viento, en este caso es Nazaré que tiene una variación ostensiblemente más amplia.
 
 \section{Análisis Inferencial}%
 \label{sec:resultados}
