@@ -28,19 +28,18 @@
 \section{Introducción}%
 \label{sec:introduccion}
 % Justificación + objetivos
-Dentro del ámbito del surf hay muchos factores a tener en cuenta en cuanto  a lo que se refiere a la ``ola perfecta''. Entre ellos, dos de los más importantes son el tamaño de la ola y la velocidad del viento.
+El gran interés de uno de los integrantes del grupo, Alex Herrero, en el mundo del surf nos ha llevado a investigar este apasionante tema. Es un tema complicado dado que los datos Dentro del ámbito del surf hay muchos factores a tener en cuenta en cuanto a lo que se refiere a la ``ola perfecta''. Entre ellos, dos de los más importantes son el tamaño de la ola y la velocidad del viento.
 
-En este caso queremos comparar dos de los surf spots\footnote{Lugar con olas surfeables} con las olas más grandes del mundo a lo largo de la historia; Nazaré en Portugal y Jaws en Peahi, Hawaii. Paralelamente observaremos qué relación tiene la velocidad de viento con el tamaño de las olas en ambos sitios.
+En este caso queremos comparar dos de los \textit{surf spots}\footnote{Lugar con olas surfeables} con las olas más grandes del mundo a lo largo de la historia; Nazaré en Portugal y Jaws en Peahi, Hawái. Paralelamente observaremos qué relación tiene la velocidad de viento con el tamaño de las olas en ambos sitios.
 
 \section{Recogida de datos}%
 \label{sec:recogida_de_datos}
 
 Para realizar nuestro análisis recogimos datos de viento y altura de olas de
 dos localizaciones distintas. Escogimos dos playas conocidas por sus buenas
-olas para hacer surf: Nazaré, Portugal y Jaws, Hawaii.
+olas para hacer surf: Nazaré, Portugal y Jaws en Peahi, Hawái.
 
-Pudimos obtener datos de oleaje y viento del archivo de \emph{WindGuru}
-\footnote{\url{https://www.windguru.cz/archive.php}}. Con un script de
+Pudimos obtener datos de oleaje y viento del archivo histórico de \emph{WindGuru}\footnote{\url{https://www.windguru.cz/archive.php}}, un servicio especilizado en previsiones del tiempo para windsurfistas y kitesurfistas basado en el modelo numérico GFS\footnote{\url{https://es.wikipedia.org/wiki/Global_Forecast_System}}. Con un script de
 Python\footnote{El código se puede ver en el anexo
   \ref{sec:codigo_extraccion_de_datos}} extrajimos datos de la altura de las
 olas y viento en periodos de 3 horas de 2006 hasta hoy. En el caso de Nazaré
@@ -59,16 +58,16 @@ obtuvimos datos de 4377 días (35016 periodos de 3 horas) y en Jaws 3338 días
 
 \begin{figure}[!ht]
 \label{fig:wind_waves_jaws}
-  \caption{Velocidad de viento vs. Altura de olas en Jaws, Hawaii}
 \centering
 \includegraphics[width=0.6\textwidth]{./figures/jaws.pdf}
+  \caption{Velocidad de viento vs. Altura de olas en Jaws en Peahi, Hawái}
 \end{figure}
 
 \begin{figure}[!ht]
 \label{fig:wind_waves_nazare}
-  \caption{Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
 \centering
 \includegraphics[width=0.6\textwidth]{./figures/nazare.pdf}
+  \caption{Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
 \end{figure}
 
 
