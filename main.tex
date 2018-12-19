@@ -23,25 +23,19 @@
 \begin{abstract}
 % resumen
 % <= 250 palabras
-%En este trabajo se estudian dos factores muy importantes en el surf, la altura de las olas y la velocidad 
-%del viento en dos de los sitios más conocidos dentro de este ámbito, Nazaré y Jaws. Se quiere comparar ambos 
-%sitios, observar como influyen los dos parámetros entre ellos (y...), para ello se recogen más de sesenta mil 
-%datos de más de tres mil días con los que a través de una serie de cálculos se obtienen los gráficos y de 
-%éstos las conclusiones con las cuales rechazamos/aceptamos nuestras hipótesis iniciales afirmando así que...
 
 En este trabajo se estudian dos factores muy importantes en el surf, la altura de las olas y la velocidad 
-del viento en dos de los sitios más conocidos dentro de este ámbito, Nazaré y Jaws. 
-
-%Para comparar como influyen los dos parámetros en estas localizaciones recogimos datos de los últimos 9 años en
-%intervalos de 3 horas.
+del viento en dos de los sitios más conocidos dentro de este deporte, Nazaré, Portugal y Jaws en Peahi, Hawái. 
 
 Cogiendo una pequeña muestra de todos los datos, planteamos la hipótesis que la media de altura de olas
-en Nazaré es mayor a las de Jaws.
+en Nazaré es mayor a las de Jaws, la cual confirmamos al hacer una prueba de hipótesis unilateral.
 También calculamos cómo afecta la velocidad del viento a la altura de las olas en ambas localizaciones 
 por separado, con un modelo lineal, determinando que existe una correlación positiva aunque no muy fuerte.
 
-%datos de más de tres mil días con los que a través de una serie de cálculos se obtienen los gráficos y de 
-%éstos las conclusiones con las cuales rechazamos/aceptamos nuestras hipótesis iniciales afirmando así que...
+Finalmente, averiguamos que el efecto del viento no es igual en los dos \textit{surf spots}; en Nazaré
+el efecto del viento es perceptible a cualquier velocidad mientras que en Jaws se necesita un mínimo de 
+10 nudos aproximadamente para que el efecto sea apreciable.
+
 \end{abstract}
 
 \section{Introducción}%
@@ -59,7 +53,7 @@ puesto que la velocidad del viento es uno de los factores más importantes en la
 % Recogida de datos + seleccion de datos
 Para realizar nuestro análisis recogimos datos de viento y altura de olas de
 dos localizaciones distintas. Escogimos dos playas conocidas por sus buenas
-olas para hacer surf: Nazaré, Portugal y Jaws en Peahi, Hawái.
+olas para hacer surf: Nazaré y Jaws.
 
 Pudimos obtener datos de oleaje y viento del archivo histórico de \emph{WindGuru}\footnote{\url{https://www.windguru.cz/archive.php}}, un servicio especializado en previsiones del tiempo para windsurfistas y kitesurfistas basado en el modelo numérico GFS\footnote{\url{https://es.wikipedia.org/wiki/Global_Forecast_System}}. Con un \textit{script} de
 Python\footnote{El código se puede ver en el anexo
@@ -80,7 +74,7 @@ Con el fin de simplificar los cálculos al hacer la prueba de hipótesis y la re
     \label{tab:summary_nazare}
 \end{table}
 
-El Cuadro \ref{tab:summary_nazare} muestra un resumen de los datos recogidos sobre Nazaré. Cómo se puede observar la altura máxima registrada es de 11.4 metros, a pesar de ello la media es de 2.4 metros debido a que durante la mayoría de días la altura está cerca del mínimo (0 metros). Por este mismo motivo la mediana (de 2.1 metros) se encuentra por debajo de la media, y el primer y tercer cuartiles son de 1.6 y 3 metros respectivamente. Dicha distribución se puede ver con claridad en la Figura \ref{fig:hist_waves_nazare}.
+El Cuadro \ref{tab:summary_nazare} muestra un resumen de los datos recogidos sobre Nazaré. Cómo se puede observar la altura máxima registrada es de 11.4 metros, a pesar de ello la media es de 2.4 metros debido a que durante la mayoría de días la altura está entre el mínimo (0 metros) y el primer cuartil (1.6 metros). Por este mismo motivo la mediana (de 2.1 metros) se encuentra por debajo de la media, y tercer cuartil es de 3 metros. Dicha distribución se puede ver con claridad en la Figura \ref{fig:hist_waves_nazare}.
 
 \begin{figure}[H]
     \centering
@@ -100,7 +94,7 @@ Con respecto a los datos sobre la velocidad del viento sucede algo parecido, per
 \end{table}
 
 
-En el caso de Jaws, los datos se exponen en el Cuadro \ref{tab:summary_jaws}, y se observa que la distribución de la altura es bastante similar a la de Nazaré pero los datos están levemente más centrados (véase Figura \ref{fig:hist_waves_jaws}). En Jaws el rango de altura es menor ya que el valor mínimo sigue siendo de 0 metros pero el máximo en cambio es de 5.9, casi la mitad que en Nazaré. La media y la mediana prácticamente coinciden siendo 2 y 1.9 metros respectivamente. El primer cuartil se encuentra en 1.6 metros y el tercero en 2.4 metros.
+En el caso de Jaws, los datos se exponen en el Cuadro \ref{tab:summary_jaws}, y se observa que la distribución de la altura es bastante similar a la de Nazaré pero los datos están ligeramente más centrados (véase Figura \ref{fig:hist_waves_jaws}). En Jaws el rango de altura es menor ya que el valor mínimo sigue siendo de 0 metros pero el máximo en cambio es de 5.9, casi la mitad que en Nazaré. La media y la mediana prácticamente coinciden siendo 2 y 1.9 metros respectivamente. El primer cuartil se encuentra en 1.6 metros y el tercero en 2.4 metros.
 
 \begin{figure}[H]
     \centering
@@ -141,8 +135,8 @@ Habiendo calculado la media de la altura de las olas tanto de Nazaré como de Ja
 prueba de hipótesis \ref{eq:PH}.
 \begin{align}
 \label{eq:PH}
-    H_0 : \mu_N &= \mu_J \nonumber \\
-    H_1 : \mu_N &\neq \mu_J
+    H_0 : \mu_N &< \mu_J \nonumber \\
+    H_1 : \mu_N &> \mu_J
 \end{align}
 
 \begin{align}
@@ -155,9 +149,36 @@ prueba de hipótesis \ref{eq:PH}.
 \end{align}
 
 Tras ejecutar la función \texttt{t.test} de R, pasándole como parámetros los datos de la altura de las olas 
-de Nazaré y Jaws, hemos obtenido que el valor de \( \hat{t} \) es 1.6972 y el $p$-valor es 0.08998.
+de Nazaré y Jaws, hemos obtenido que el valor de \( \hat{t} \) es 1.6972 y el $p$-valor es 0.04499.
 Paralelamente, hemos calculado  \( t_{n_N+n_J-2, 1-\nicefrac{\alpha}{2}} \), donde \(n_N = n_J = 500\)
-y \(\alpha = 0.05\), obteniendo  que \( t_{998,\: 0.975} = 1.9623\). Por lo tanto, como \(|\hat{t}| < t_{998,\: 0.975}\) no rechazamos nuestra hipótesis \(H_0\).
+y \(\alpha = 0.05\), obteniendo  que \( t_{998,\: 0.975} = 1.9623\). Por lo tanto, como \(\alpha > p-valor\) 
+rechazamos nuestra hipótesis \(H_0\) y confirmamos que la media de la altura de las olas en Nazaré es
+superior a Jaws.
+
+
+
+%  	Welch Two Sample t-test
+%  
+%  data:  nazare_500$Wave and jaws_500$Wave
+%  t = 1.6972, df = 984.19, p-value = 0.04499
+%  alternative hypothesis: true difference in means is greater than 0
+%  95 percent confidence interval:
+%   0.003923912         Inf
+%  sample estimates:
+%  mean of x mean of y 
+%     2.4562    2.3250 
+
+%  
+%  	Welch Two Sample t-test
+%  
+%  data:  nazare_500$Wave and jaws_500$Wave
+%  t = 1.6972, df = 984.19, p-value = 0.955
+%  alternative hypothesis: true difference in means is less than 0
+%  95 percent confidence interval:
+%        -Inf 0.2584761
+%  sample estimates:
+%  mean of x mean of y 
+%     2.4562    2.3250 
 
 %   	Welch Two Sample t-test
 %   
@@ -181,7 +202,7 @@ y \(\alpha = 0.05\), obteniendo  que \( t_{998,\: 0.975} = 1.9623\). Por lo tant
 
 Usando la función \texttt{t.test} de R hemos obtenido:
 
-\[IC\left( \mu_N - \mu_J, 0.95\right) = \left[ -0.02050262, 0.28290262 \right]\]
+\[IC\left( \mu_N - \mu_J, 0.95\right) = \left[ 0.003923912,  \infty \right]\]
 
 \section{Análisis de Regresión Lineal Simple}
 \label{sec:rls}
@@ -279,7 +300,7 @@ correlación son mayores a 0. A pesar de esto, los valores de \(r^2\) son bastan
 
 A modo de conclusión, hemos visto que la media de la altura de las olas en Nazaré es superior a la de Jaws,
 2.414 y 2.047 metros respectivamente. De hecho, podemos afirmar que con una confianza del 95\% las olas en
-Nazaré serán entre -0.0205 y 0.2829 metros más altas que en Jaws y por esta razón podemos confirmar
+Nazaré serán como mínimo 0.003924 metros más altas que en Jaws y por esta razón podemos confirmar
 nuestra hipótesis inicial.
 
 Además, como hemos apreciado en las Figuras \ref{fig:wind_waves_jaws_fit} y \ref{fig:wind_waves_nazare_fit}, la velocidad del viento sí que afecta a la altura de las olas, pues hemos obtenido una correlación para Nazaré y Jaws de 0.382916739203572 y 0.423654153616663 respectivamente. No obstante, el efecto no es tan fuerte y evidente como habíamos imaginado puesto que las correlaciones son bajas.
@@ -289,7 +310,9 @@ curva \emph{smooth} generada por el R. Se aprecia una diferencia clara entre est
 No hay un cambio apreciable en la altura de las olas, hasta que el viento supera los 10 nudos, por lo que
 seria interesante realizar un análisis más en profundidad tomando solo los datos con viento entre 10 y 20 nudos.
 Esta diferencia no se aprecia tanto en el caso de Nazaré (véase Figura \ref{fig:wind_waves_nazare_all}) por lo que 
-podemos concluir que el efecto del viento es distinto en las dos localizaciones. Adicionalmente, los valores que hemos obtenido en la regresión lineal para \(\beta_2\) también corroboran está conclusión pues la \(\beta_2\) de Nazaré es ligeramente inferior a la de Jaws implicando que el efecto del viento es superior en Jaws.
+podemos concluir que el efecto del viento es distinto en las dos localizaciones. Adicionalmente, 
+los valores que hemos obtenido en la regresión lineal para \(\beta_2\) indican que el efecto del viento es
+superior en Jaws pues la \(\beta_2\) de Nazaré es ligeramente inferior a la de Jaws.
 
 \pagebreak
 \appendix
