@@ -23,6 +23,24 @@
 \begin{abstract}
 % resumen
 % <= 250 palabras
+%En este trabajo se estudian dos factores muy importantes en el surf, la altura de las olas y la velocidad 
+%del viento en dos de los sitios más conocidos dentro de este ámbito, Nazaré y Jaws. Se quiere comparar ambos 
+%sitios, observar como influyen los dos parámetros entre ellos (y...), para ello se recogen más de sesenta mil 
+%datos de más de tres mil días con los que a través de una serie de cálculos se obtienen los gráficos y de 
+%éstos las conclusiones con las cuales rechazamos/aceptamos nuestras hipótesis iniciales afirmando así que...
+
+En este trabajo se estudian dos factores muy importantes en el surf, la altura de las olas y la velocidad 
+del viento en dos de los sitios más conocidos dentro de este ámbito, Nazaré y Jaws. 
+
+Para comparar como influyen los dos parámetros en estas localizaciones recogimos datos de los últimos 9 años en
+intervalos de 3 horas.
+
+Comparamos cómo afecta la velocidad del viento a la altura de las olas en ambas localizaciones con un modelo
+lineal, determinando que existe una correlación positiva
+que 
+
+datos de más de tres mil días con los que a través de una serie de cálculos se obtienen los gráficos y de 
+éstos las conclusiones con las cuales rechazamos/aceptamos nuestras hipótesis iniciales afirmando así que...
 \end{abstract}
 
 \section{Introducción}%
@@ -32,7 +50,7 @@ El gran interés de uno de los integrantes del grupo, Alex Herrero, en el mundo 
 
 En este caso queremos comparar dos de los \textit{surf spots}\footnote{Lugar con olas surfeables} más famosos y con las olas más grandes del mundo a lo largo de la historia; Nazaré en Portugal y Jaws en Peahi, Hawái. Paralelamente observaremos qué relación tiene la velocidad de viento con el tamaño de las olas en ambos sitios.
 
-Nuestra hipótesis es que la media de la altura de las olas en Nazaré será superior a la de Jaws, dado que en los últimos años el récord de ola más grandes surfeada por el hombre se ha roto en Nazaré varias veces. Además, el fondo marino de Nazaré tiene un relieve mejor para la creación de olas gigantes. En cuanto a la relación entre la velocidad del viento y la altura de las olas, esperamos que la correlación sea positiva
+Nuestra hipótesis es que la media de la altura de las olas en Nazaré será superior a la de Jaws, dado que en los últimos años el récord de ola más grande surfeada por el hombre se ha roto en Nazaré varias veces. Además, el fondo marino de Nazaré tiene un relieve mejor para la creación de olas gigantes. En cuanto a la relación entre la velocidad del viento y la altura de las olas, esperamos que la correlación sea positiva
 puesto que la velocidad del viento es uno de los factores más importantes en la creación de las olas.
 
 \section{Recogida de datos}%
@@ -109,14 +127,135 @@ La velocidad del viento en Jaws en comparación con la de Nazaré, a pesar de qu
     \label{fig:boxplots}
 \end{figure}
 
-En la Figura \ref{fig:boxplot_wind} podemos ver claramente como la media de la velocidad del viento en Jaws es superior a la de Nazaré, no obstante la variabilidad de Jaws es ligeramente superior como se puede apreciar en el primer cuartil. En cuanto a la altura de las olas (véase Figura \ref{fig:boxplot_wave}), la media es levemente mayor y a diferencia del viento, en este caso es Nazaré que tiene una variación ostensiblemente más amplia.
+En la Figura \ref{fig:boxplot_wind} podemos ver claramente como la media de la velocidad del viento en Jaws 
+es superior a la de Nazaré, no obstante la variabilidad de Jaws es ligeramente superior como se puede apreciar 
+en el primer cuartil. En cuanto a la altura de las olas (véase Figura \ref{fig:boxplot_wave}), la media 
+es levemente mayor y a diferencia del viento, en este caso es Nazaré que tiene una variación ostensiblemente 
+más amplia.
 
 \section{Análisis Inferencial}%
 \label{sec:resultados}
 % Descriptiva más inferencia
+Habiendo calculado la media de la altura de las olas tanto de Nazaré como de Jaws, hemos llegado a la
+prueba de hipótesis \ref{eq:PH}.
+\begin{align}
+\label{eq:PH}
+    H_0 : \mu_N &= \mu_J \nonumber \\
+    H_1 : \mu_N &\neq \mu_J
+\end{align}
+
+\begin{align}
+\label{eq:t}
+    \hat{t} &= \frac{\bar{\mathcal{Y}_N} - \bar{\mathcal{Y}_J} }{
+        S\sqrt{\nicefrac{1}{n_N} + \nicefrac{1}{n_J}}
+    } \\
+\label{eq:S2}
+    S^2 &= \frac{\left(n_N - 1\right)S_N^2 + \left(n_J-1\right)S_J^2}{n_N+n_J-2}
+\end{align}
+
+Tras ejecutar la función \texttt{t.test} de R, pasándole como parámetros los datos de la altura de las olas 
+de Nazaré y Jaws, hemos obtenido que el valor de \( \hat{t} \) es 1.6972 y el $p$-valor es 0.08998.
+Paralelamente, hemos calculado  \( t_{n_N+n_J-2, 1-\nicefrac{\alpha}{2}} \), donde \(n_N = n_J = 500\)
+y \(\alpha = 0.05\), obteniendo  que \( t_{998,\: 0.975} = 1.9623\). Por lo tanto, como \(|\hat{t}| < t_{998,\: 0.975}\) no rechazamos nuestra hipótesis \(H_0\).
+
+%   	Welch Two Sample t-test
+%   
+%   data:  nazare_500$Wave and jaws_500$Wave
+%   t = 1.6972, df = 984.19, p-value =  0.08998
+%   alternative hypothesis: true difference in means is not equal to 0
+%   95 percent confidence interval:
+%    -0.02050262  0.28290262
+%   sample estimates:
+%   mean of x mean of y 
+%      2.4562    2.3250 
+
+\begin{equation}
+\label{eq:IntConfi}
+    IC\left( \mu_N - \mu_J, 1-\alpha\right) =
+    \left[ \bar{x_N} - \bar{x_J} \pm t_{n_J+n_S-2, 0.975} \cdot S \sqrt{
+        \frac{1}{n_N}  + \frac{1}{n_J}
+    }
+    \right]
+\end{equation}
+
+Usando la función \texttt{t.test} de R hemos obtenido el siguiente intervalo de confianza del 95\% \(IC\left( \mu_N - \mu_J, 0.9\right)\)
 
 \section{Análisis de Regresión Lineal Simple}
 \label{sec:rls}
+
+Tal como se explica en la sección \ref{sec:recogida_de_datos}, tomamos una muestra sobre nuestros datos
+iniciales con el fin de poder realizar los cálculos de regresión con mayor facilidad. % IDK si aixo cal
+
+\begin{align}
+\label{eq:RLS}
+    Y &= \text{Altura Ola}     \nonumber \\
+    X &= \text{Velocidad Viento}     \nonumber \\
+    Y &= \beta_1 + \beta_2 X 
+\end{align}
+
+\begin{equation}
+\label{eq:correlation}
+    \rho_{X,Y}=\mathrm{corr}(X,Y) = \frac{\mathrm{cov}(X,Y)}{\sigma_X \sigma_Y}
+\end{equation}
+
+Definimos pues nuestro modelo lineal como se muestra en \ref{eq:RLS}. I calculamos la regresión en R con
+\texttt{lm}. Los resultados obtenidos se muestran en la tabla \ref{tab:results_RLS}.
+En las figuras \ref{fig:wind_waves_jaws_fit} y \ref{fig:wind_waves_nazare_fit} podemos observar la
+regresión para Jaws y Nazaré respectivamente.
+
+En el caso de Nazaré, obtenemos una correlación de 0.382916739203572 y en Jaws de 0.423654153616663. Existe
+pues una correlación positiva entre el viento y la altura de las olas, ya que los valores de
+correlación son mayores a 0. A pesar de esto, los valores de \(r^2\) son bastante bajos, 0.1795 y 0.1643 respectivamente, por lo que podemos concluir que pese a que su correlación es positiva, no es muy fuerte.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{lcc|cc}
+        \toprule
+        & \multicolumn{2}{c}{Nazaré} & \multicolumn{2}{c}{Jaws} \\
+        \midrule
+        & Estimado & Std.Error & Estimado & Std.Error \\
+        \midrule
+        \(\beta_1\)     & 1.5453684 & 0.11204219  &  1.3609970 & 0.10342377  \\
+        \(\beta_2\)     & 0.1014741 & 0.01096999  &  0.1103989 & 0.01057748 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Resultados RLS}
+    \label{tab:results_RLS}
+\end{table}
+
+%     Call:
+%     lm(formula = Wave ~ Wind, data = jaws_500)
+%     
+%     Residuals:
+%         Min      1Q  Median      3Q     Max 
+%     -1.8962 -0.7442 -0.2130  0.4886  4.2582 
+%     
+%     Coefficients:
+%                 Estimate Std. Error t value Pr(>|t|)    
+%     (Intercept)  1.36100    0.10342   13.16   <2e-16 ***
+%     Wind         0.11040    0.01058   10.44   <2e-16 ***
+%     ---
+%     Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+%     
+%     Residual standard error: 1.041 on 498 degrees of freedom
+%     Multiple R-squared:  0.1795,	Adjusted R-squared:  0.1778 
+%     F-statistic: 108.9 on 1 and 498 DF,  p-value: < 2.2e-16
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{./figures/jaws_500_lmFit.pdf}
+    \caption{Regresión Velocidad de viento vs. Altura de olas en Jaws en Peahi, Hawái}
+    \label{fig:wind_waves_jaws_fit}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{./figures/nazare_500_lmFit.pdf}
+    \caption{Regresión Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
+    \label{fig:wind_waves_nazare_fit}
+\end{figure}
+
 
 \begin{figure}[H]
     \centering
@@ -132,33 +271,6 @@ En la Figura \ref{fig:boxplot_wind} podemos ver claramente como la media de la v
     \label{fig:wind_waves_nazare_all}
 \end{figure}
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=0.6\textwidth]{./figures/jaws_bin2d.pdf}
-%    \caption{Velocidad de viento vs. Altura de olas en Jaws en Peahi, Hawái}
-%    \label{fig:wind_waves_jaws}
-%\end{figure}
-%
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=0.6\textwidth]{./figures/jaws_smooth.pdf}
-%    \caption{Velocidad de viento vs. Altura de olas en Jaws en Peahi, Hawái}
-%    \label{fig:jaws_smooth}
-%\end{figure}
-%
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=0.6\textwidth]{./figures/nazare_bin2d.pdf}
-%    \caption{Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
-%    \label{fig:wind_waves_nazare}
-%\end{figure}
-%
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[width=0.6\textwidth]{./figures/nazare_smooth.pdf}
-%    \caption{Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
-%    \label{fig:nazare_smooth}
-%\end{figure}
 
 \section{Discusión}%
 \label{sec:discusión}
@@ -170,6 +282,62 @@ En la Figura \ref{fig:boxplot_wind} podemos ver claramente como la media de la v
 \label{sec:codigo_extraccion_de_datos}
 
 \lstinputlisting[language=Python]{./process.py}
+
+\pagebreak
+
+\section{Código R}%
+\label{sec:codigo_r}
+
+\lstinputlisting[language=R]{./notebookR.r}
+
+\section{Gráficos Adicionales}
+\label{sec:extra_plots}
+
+% mn_diff <- mean(nazare_500$Wave) - mean(jaws_500$Wave)
+% t.test(nazare_500$Wave, jaws_500$Wave, vas.equal=T, mu=mn_diff)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{./figures/jaws_500_lm.pdf}
+    \caption{Regresión Velocidad de viento vs. Altura de olas en Jaws}
+    \label{fig:wind_waves_jaws_fit_anal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{./figures/nazare_500_lm.pdf}
+    \caption{Regresión Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
+    \label{fig:wind_waves_nazare_fit_anal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figures/jaws_bin2d.pdf}
+    \caption{Velocidad de viento vs. Altura de olas en Jaws en Peahi, Hawái}
+    \label{fig:wind_waves_jaws}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figures/jaws_smooth.pdf}
+    \caption{Velocidad de viento vs. Altura de olas en Jaws en Peahi, Hawái}
+    \label{fig:jaws_smooth}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figures/nazare_bin2d.pdf}
+    \caption{Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
+    \label{fig:wind_waves_nazare}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figures/nazare_smooth.pdf}
+    \caption{Velocidad de viento vs. Altura de olas en Nazaré, Portugal}
+    \label{fig:nazare_smooth}
+\end{figure}
+
 \end{document}
 
 % vim:sw=2:ts=2:et:spell:spelllang=es:
