@@ -32,15 +32,16 @@
 En este trabajo se estudian dos factores muy importantes en el surf, la altura de las olas y la velocidad 
 del viento en dos de los sitios más conocidos dentro de este ámbito, Nazaré y Jaws. 
 
-Para comparar como influyen los dos parámetros en estas localizaciones recogimos datos de los últimos 9 años en
-intervalos de 3 horas.
+%Para comparar como influyen los dos parámetros en estas localizaciones recogimos datos de los últimos 9 años en
+%intervalos de 3 horas.
 
-Comparamos cómo afecta la velocidad del viento a la altura de las olas en ambas localizaciones con un modelo
-lineal, determinando que existe una correlación positiva
-que 
+Cogiendo una pequeña muestra de todos los datos, planteamos la hipótesis que la media de altura de olas
+en Nazaré es mayor a las de Jaws.
+También calculamos cómo afecta la velocidad del viento a la altura de las olas en ambas localizaciones 
+por separado, con un modelo lineal, determinando que existe una correlación positiva aunque no muy fuerte.
 
-datos de más de tres mil días con los que a través de una serie de cálculos se obtienen los gráficos y de 
-éstos las conclusiones con las cuales rechazamos/aceptamos nuestras hipótesis iniciales afirmando así que...
+%datos de más de tres mil días con los que a través de una serie de cálculos se obtienen los gráficos y de 
+%éstos las conclusiones con las cuales rechazamos/aceptamos nuestras hipótesis iniciales afirmando así que...
 \end{abstract}
 
 \section{Introducción}%
@@ -178,7 +179,9 @@ y \(\alpha = 0.05\), obteniendo  que \( t_{998,\: 0.975} = 1.9623\). Por lo tant
     \right]
 \end{equation}
 
-Usando la función \texttt{t.test} de R hemos obtenido el siguiente intervalo de confianza del 95\% \(IC\left( \mu_N - \mu_J, 0.9\right)\)
+Usando la función \texttt{t.test} de R hemos obtenido:
+
+\[IC\left( \mu_N - \mu_J, 0.95\right) = \left[ -0.02050262, 0.28290262 \right]\]
 
 \section{Análisis de Regresión Lineal Simple}
 \label{sec:rls}
@@ -200,7 +203,7 @@ iniciales con el fin de poder realizar los cálculos de regresión con mayor fac
 
 Definimos pues nuestro modelo lineal como se muestra en \ref{eq:RLS}. I calculamos la regresión en R con
 \texttt{lm}. Los resultados obtenidos se muestran en la tabla \ref{tab:results_RLS}.
-En las figuras \ref{fig:wind_waves_jaws_fit} y \ref{fig:wind_waves_nazare_fit} podemos observar la
+En las Figuras \ref{fig:wind_waves_jaws_fit} y \ref{fig:wind_waves_nazare_fit} podemos observar la
 regresión para Jaws y Nazaré respectivamente.
 
 En el caso de Nazaré, obtenemos una correlación de 0.382916739203572 y en Jaws de 0.423654153616663. Existe
@@ -271,9 +274,22 @@ correlación son mayores a 0. A pesar de esto, los valores de \(r^2\) son bastan
     \label{fig:wind_waves_nazare_all}
 \end{figure}
 
-
 \section{Discusión}%
 \label{sec:discusión}
+
+A modo de conclusión, hemos visto que la media de la altura de las olas en Nazaré es superior a la de Jaws,
+2.414 y 2.047 metros respectivamente. De hecho, podemos afirmar que con una confianza del 95\% las olas en
+Nazaré serán entre -0.0205 y 0.2829 metros más altas que en Jaws y por esta razón podemos confirmar
+nuestra hipótesis inicial.
+
+Además, como hemos apreciado en las Figuras \ref{fig:wind_waves_jaws_fit} y \ref{fig:wind_waves_nazare_fit}, la velocidad del viento sí que afecta a la altura de las olas, pues hemos obtenido una correlación para Nazaré y Jaws de 0.382916739203572 y 0.423654153616663 respectivamente. No obstante, el efecto no es tan fuerte y evidente como habíamos imaginado puesto que las correlaciones son bajas.
+
+En la Figura \ref{fig:wind_waves_jaws_all} se puede observar nuestra regresión junto a la
+curva \emph{smooth} generada por el R. Se aprecia una diferencia clara entre estas.
+No hay un cambio apreciable en la altura de las olas, hasta que el viento supera los 10 nudos, por lo que
+seria interesante realizar un análisis más en profundidad tomando solo los datos con viento entre 10 y 20 nudos.
+Esta diferencia no se aprecia tanto en el caso de Nazaré (véase Figura \ref{fig:wind_waves_nazare_all}) por lo que 
+podemos concluir que el efecto del viento es distinto en las dos localizaciones. Adicionalmente, los valores que hemos obtenido en la regresión lineal para \(\beta_2\) también corroboran está conclusión pues la \(\beta_2\) de Nazaré es ligeramente inferior a la de Jaws implicando que el efecto del viento es superior en Jaws.
 
 \pagebreak
 \appendix
